@@ -1,11 +1,26 @@
-;
 const express = require('express');
 const router = express.Router();
 const db = require("../config/config.json");
 const { query, application } = require('express');
+const models = require('../models')
 
 var registrarTurma = router.post('/registrarTurma',async(req,res)=>{
-    console.log(req.body.idCatequista )
+
+    let cadastrar = await models.turmas.create({
+        idCatequista : req.body.id,
+        diaencontro : req.body.dia,
+        formacao : req.body.forma
+    })
+
 })
 
-module.exports = {registrarTurma}
+var consTurma = router.get('/cons-turma', async(req,res)=>{
+    let query = await models.turmas.findAll({
+        raw: true,
+        attributes:['idCatequista', 'diaencontro', 'formacao']
+    })
+    console.log(query)
+})
+
+
+module.exports = {registrarTurma, consTurma}

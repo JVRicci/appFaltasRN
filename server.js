@@ -19,13 +19,13 @@ app.use(bodyParser.json());
 
 //rotas
 
-app.post('/registrarTurma',async(req,res)=>{
-    console.log(req.body.id )
-})
+//inserts
+app.post('/registrarTurma',rotas.registrarTurma)
 
-//rotas.registrarTurma)
+//consulta
+app.get('/cons-turma',rotas.consTurma)
 
-
+//start do server
 let port=process.env.PORT || 3000;
 app.listen(port,()=>{
     console.log('Servidor rodando na porta: '+port);

@@ -25,6 +25,16 @@ export default function Cadastro({navigation}){
         })
     }
 
+    async function consulta(){
+        let query = await fetch(config.urlRootNode+'cons-turma',{
+            method: 'GET',
+            headers:{
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+            },
+        })
+    }
+
     return (
         <View >
             <TouchableOpacity>
@@ -47,6 +57,10 @@ export default function Cadastro({navigation}){
 
             <TouchableOpacity>
                 <Text onPress={registrarTurma}>Cadastrar</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text onPress={consulta}>Consultar</Text>
             </TouchableOpacity>
         </View>
     );

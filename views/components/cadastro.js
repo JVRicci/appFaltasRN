@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Image, View, TouchableOpacity, Text, TextInput} from "react-native"
 import config from "../../config/config.json"
+import axios from "axios"
 //import styles from "../../assets/style/styles"
 
 export default function Cadastro({navigation}){
@@ -8,7 +9,8 @@ export default function Cadastro({navigation}){
     const [idCatequista, setIdCatequisa] = useState(null)
     const [diaencontro, setDiaencontro] = useState(null)
     const [formacao, setformacao] = useState(null)
-    const [consTurma, setConsTurmas] = useState(null)
+    
+    const [consTurma, setConsTurma] = useState(null)
 
     async function registrarTurma(){
         let reqs = await fetch(config.urlRootNode+'registrarTurma',{
@@ -27,17 +29,17 @@ export default function Cadastro({navigation}){
     }
 
     async function consulta(){
-        let query = await fetch(config.urlRootNode+'cons-turma',{
-            method: 'GET',
-            headers:{
-                'Accept': 'application/json',
-                "Content-Type": "application/json",
-            },
+        let rotaCons = config.urlRootNode+'cons-turma'
+        axios({
+            method: 'get',
+            url:rotaCons,
+        }).then((response)=>{
+            console.log(response.data)
+            console.log(response.data[0].idCatequista)
+            setConsTurma(response.data[0].idCatequista)
         })
 
-        let resp = await query.json()
-        setConsTurmas(resp.formacao) 
-        console.log(consTurma)
+
     }
 
     return (
@@ -68,11 +70,7 @@ export default function Cadastro({navigation}){
                 <Text onPress={consulta}>Consultar</Text>
             </TouchableOpacity>
 
-            {consTurma &&
             <Text>{consTurma}</Text>
-            }
-            
-            
 
         </View>
     );

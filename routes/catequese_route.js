@@ -15,7 +15,7 @@ var registrarTurma = router.post('/registrarTurma',async(req,res)=>{
 })
 
 var consTurma = router.get('/cons-turma', async(req,res)=>{
-    let query = await models.turmas.findOne({
+    let query = await models.turmas.findAll({
         raw: true,
         attributes:['idCatequista', 'diaencontro', 'formacao']
     })

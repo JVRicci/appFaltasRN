@@ -8,6 +8,7 @@ export default function Cadastro({navigation}){
     const [idCatequista, setIdCatequisa] = useState(null)
     const [diaencontro, setDiaencontro] = useState(null)
     const [formacao, setformacao] = useState(null)
+    const [consTurma, setConsTurmas] = useState(null)
 
     async function registrarTurma(){
         let reqs = await fetch(config.urlRootNode+'registrarTurma',{
@@ -17,7 +18,7 @@ export default function Cadastro({navigation}){
                 "Content-Type": "application/json",
             },
             body:JSON.stringify({
-                id: idCatequista,
+                idC: idCatequista,
                 dia:diaencontro,
                 forma:formacao
             })
@@ -33,6 +34,10 @@ export default function Cadastro({navigation}){
                 "Content-Type": "application/json",
             },
         })
+
+        let resp = await query.json()
+        setConsTurmas(resp.formacao) 
+        console.log(consTurma)
     }
 
     return (
@@ -62,6 +67,13 @@ export default function Cadastro({navigation}){
             <TouchableOpacity>
                 <Text onPress={consulta}>Consultar</Text>
             </TouchableOpacity>
+
+            {consTurma &&
+            <Text>{consTurma}</Text>
+            }
+            
+            
+
         </View>
     );
 }

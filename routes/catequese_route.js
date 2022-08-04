@@ -7,7 +7,7 @@ const models = require('../models')
 var registrarTurma = router.post('/registrarTurma',async(req,res)=>{
 
     let cadastrar = await models.turmas.create({
-        idCatequista : req.body.id,
+        idCatequista : req.body.idC,
         diaencontro : req.body.dia,
         formacao : req.body.forma
     })
@@ -15,11 +15,11 @@ var registrarTurma = router.post('/registrarTurma',async(req,res)=>{
 })
 
 var consTurma = router.get('/cons-turma', async(req,res)=>{
-    let query = await models.turmas.findAll({
+    let query = await models.turmas.findOne({
         raw: true,
         attributes:['idCatequista', 'diaencontro', 'formacao']
     })
-    console.log(query)
+    res.send(query)
 })
 
 

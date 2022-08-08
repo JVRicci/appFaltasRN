@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, TextInput} from "react-native"
+import {Image, View, TouchableOpacity, Text, TextInput, FlatList} from "react-native" 
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import config from "../../config/config.json"
 import axios from "axios"
-//import styles from "../../assets/style/styles"
+import styles from "../../assets/style/styles"
+
 
 export default function Cadastro({navigation}){
 
@@ -11,6 +13,8 @@ export default function Cadastro({navigation}){
     const [formacao, setformacao] = useState(null)
     
     const [consTurma, setConsTurma] = useState(null)
+    var resultados
+
 
     async function registrarTurma(){
         let reqs = await fetch(config.urlRootNode+'registrarTurma',{
@@ -34,16 +38,17 @@ export default function Cadastro({navigation}){
             method: 'get',
             url:rotaCons,
         }).then((response)=>{
-            console.log(response.data)
-            console.log(response.data[0].idCatequista)
-            setConsTurma(response.data[0].idCatequista)
+            resultados =response.data
+
+            setConsTurma(resultados)
+            
         })
-
-
+        console.log(consTurma)
     }
 
     return (
-        <View >
+        
+        <View>
             <TouchableOpacity>
                 <Text>Tela de Cadastro</Text>
             </TouchableOpacity>
@@ -70,7 +75,31 @@ export default function Cadastro({navigation}){
                 <Text onPress={consulta}>Consultar</Text>
             </TouchableOpacity>
 
-            <Text>{consTurma}</Text>
+
+            {consTurma!=null?
+            <View style={styles.consCatequizando}>
+                <FlatList data={consTurma} 
+                //horizontal
+                keyExtractor ={(item)=>item.id}
+                renderItem={({item})=>
+                <View>
+                    <Text>ID: {item.idCatequista}</Text>
+                    <Text>Dia de encontro: {item.diaencontro}</Text>
+                    <Text>Formação: {item.formacao}</Text>
+                </View>
+
+                }
+                />  
+            </View>
+            :
+                        
+            <View>
+            <Text>
+                Nenhum resultado
+            </Text>
+            </View>
+            }
+            
 
         </View>
     );

@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
         padding:15,
         borderRadius:5,
         padding:10,
+    },
+
+    consCatequizando:{
+        backgroundColor:'#FFFFFF',
+        height:'80'
     }
 })
 

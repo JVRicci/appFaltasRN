@@ -1,7 +1,6 @@
 //chamada do file rotas
 const rotas = require('./routes/catequese_route.js')
 
-
 //packs necessários
 
 const express = require('express');
@@ -21,6 +20,7 @@ app.use(bodyParser.json());
 
 //inserts
 app.post('/registrarTurma',rotas.registrarTurma)
+app.post('/cad-encontro',rotas.cadEncontro)
 
 //consulta
 app.get('/cons-turma',rotas.consTurma)

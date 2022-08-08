@@ -1,4 +1,5 @@
 import Home from './components/home';
-import Cadastro from './components/cadastro';
+import Salas from './components/salas';
+import Catequizandos from './components/catequizandos';
 
-export {Home, Cadastro}
+export {Home, Salas, Catequizandos}

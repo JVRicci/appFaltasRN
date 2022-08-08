@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import { StyleSheet, Text, View } from 'react-native';
-import {Home, Cadastro} from './views'
+import {Home, Salas, Catequizandos} from './views'
 import styles from "./assets/style/mainStyle"
 
 export default function App() {
@@ -13,9 +13,9 @@ export default function App() {
       <Stack.Navigator >
         <Stack.Screen name="Inicio"
         component={Home}
-        
       />
-        <Stack.Screen name="Cadastro" component={Cadastro} ></Stack.Screen>
+        <Stack.Screen name="Salas" component={Salas} ></Stack.Screen>
+        <Stack.Screen name="Catequizandos" component={Catequizandos} ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

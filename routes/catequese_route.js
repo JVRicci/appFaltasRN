@@ -14,13 +14,38 @@ var registrarTurma = router.post('/registrarTurma',async(req,res)=>{
 
 })
 
+var cadEncontro = router.post('/cad-encontro',async(req,res)=>{ 
+
+    let cadastrar= await models.encontros.create({
+        idTurma : req.body.idTurma,
+        descricao : req.body.descricao
+    })
+
+
+} )
+
+
+//Consultas
+
+
 var consTurma = router.get('/cons-turma', async(req,res)=>{
     let query = await models.turmas.findAll({
         raw: true,
-        attributes:['idCatequista', 'diaencontro', 'formacao']
+        attributes:['id', 'idCatequista', 'diaencontro', 'formacao']
     })
     res.send(query)
 })
 
 
-module.exports = {registrarTurma, consTurma}
+
+//login
+
+var login = router.get('/login',async(req,res)=>{
+    let query = await models.catequistas.findOne({
+        raw:true,
+        atttributes:['id', 'nome', 'nascimento', 'ativo']
+    })
+    res.send(query)
+})
+
+module.exports = {registrarTurma, consTurma, cadEncontro, login}

@@ -1,94 +1,54 @@
 import React, {useEffect, useState} from 'react';
-import {Image, View, TouchableOpacity, Text, TextInput, FlatList} from "react-native" 
+import { Alert, Modal, Pressable, View, TouchableOpacity, Text, TextInput, FlatList} from "react-native" 
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import config from "../../config/config.json"
 import axios from "axios"
 import styles from "../../assets/style/styles"
+import modalStyles from "../../assets/style/modalStyle"
+import CadEncontroModal from './modals/cadEncontroModal';
 
 
 export default function Salas({navigation}){
 
-    const [descricao, setDescricao] = useState(null)
     
-    async function registrarEncontro(){
-        let reqs = config.urlRootNode+'cad-encontro'
-            axios.post(reqs, {
-                idTurma: 2,
-                descricao:descricao,
-            })
-    }
+    const [turmas, setTurmas] = useState(null)
 
+    var turmasList
+
+    async function dadosTurma(){
+        let reqs = config.urlRootNode+'cons-turma'
+        axios.get(reqs).then((response) =>{
+            turmasList = response.data
+            setTurmas(turmasList)
+        })
+    }
   
 
     return (
-        
-        <View>
-            <TouchableOpacity>
-                <Text>Tela de Cadastro</Text>
-            </TouchableOpacity>
-
-            <TextInput 
-                placeholder="Descrição do Encontro" 
-                onChangeText={setDescricao}/>
-
-            <TouchableOpacity>
-                <Text onPress={registrarEncontro}>Cadastrar</Text>
-            </TouchableOpacity>
-
-
-
-            
+       <Pressable > 
+        <View onLayout={dadosTurma} >
             
 
-        </View>
-    );
-}
-
-
-/*
-
-  async function consultaEncontro(){
-        let rotaCons = config.urlRootNode+'cons-encontro'
-        axios({
-            method: 'get',
-            url:rotaCons,
-        }).then((response)=>{
-            resultados =response.data
-
-            setConsTurma(resultados)
-            
-        })
-        console.log(consTurma)
-    }
-
-
-
-
-
-
-
-
-{consTurma!=null?
             <View style={styles.consCatequizando}>
-                <FlatList data={consTurma} 
-                //horizontal
+                <FlatList data={turmas}
                 keyExtractor ={(item)=>item.id}
                 renderItem={({item})=>
                 <View>
-                    <Text>ID: {item.idCatequista}</Text>
-                    <Text>Dia de encontro: {item.diaencontro}</Text>
+                    <Text>Dia de Encontro: {item.diaencontro}</Text>
                     <Text>Formação: {item.formacao}</Text>
                 </View>
-
                 }
-                />  
+                />
             </View>
-            :
-                        
+            
             <View>
-            <Text>
-                Nenhum resultado
-            </Text>
+            <CadEncontroModal />
             </View>
-            }
-*/
+            
+            
+        </View>
+
+</Pressable>
+        
+    );
+}

@@ -26,6 +26,8 @@ const styles = StyleSheet.create({
         backgroundColor:'#FFFFFF',
         height:'80'
     }
+
+    
 })
 
 export default styles

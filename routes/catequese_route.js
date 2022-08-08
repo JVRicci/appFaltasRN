@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require("../config/config.json");
 const { query, application } = require('express');
-const models = require('../models')
+const models = require('../models');
+//const { where } = require('sequelize/types');
 
 var registrarTurma = router.post('/registrarTurma',async(req,res)=>{
 
@@ -31,7 +32,10 @@ var cadEncontro = router.post('/cad-encontro',async(req,res)=>{
 var consTurma = router.get('/cons-turma', async(req,res)=>{
     let query = await models.turmas.findAll({
         raw: true,
-        attributes:['id', 'idCatequista', 'diaencontro', 'formacao']
+        attributes:['id', 'idCatequista', 'diaencontro', 'formacao'],
+        where:{
+            'idCatequista':1
+        }
     })
     res.send(query)
 })

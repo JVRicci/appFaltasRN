@@ -11,11 +11,28 @@ export default function App() {
   return (
     <NavigationContainer style={styles.container}>
       <Stack.Navigator >
-        <Stack.Screen name="Inicio"
-        component={Home}
+        <Stack.Screen options={{ 
+          title: 'Bem Vindo(a)', 
+          headerStyle:{backgroundColor: '#383838', textStyle:'#ffffff' },
+          headerTitleStyle: { color: 'white'}
+        }} name="Inicio"
+      component={Home}
       />
-        <Stack.Screen name="Salas" component={Salas} ></Stack.Screen>
-        <Stack.Screen name="Catequizandos" component={Catequizandos} ></Stack.Screen>
+        <Stack.Screen name="Salas"
+        options={{ 
+          title: 'Salas', 
+          headerStyle:{backgroundColor: '#383838',},
+          headerTitleStyle: { color: 'white'}
+        }}
+        
+        component={Salas} ></Stack.Screen> 
+        <Stack.Screen name="Catequizandos"
+        option={{
+          title: 'Catequizandos',
+          headerStyle:{backgroundColor: '#383838',},
+          headerTitleStyle: { color: 'white'}
+        }} 
+        component={Catequizandos} ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

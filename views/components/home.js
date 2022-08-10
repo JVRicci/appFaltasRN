@@ -6,20 +6,20 @@ export default function Home({navigation}){
 
     return (
         <View style={styles.form}>
-            <TouchableOpacity 
-            onPress={()=>navigation.navigate('Salas')}
-            style={styles.button}>
+                <TouchableOpacity 
+                onPress={()=>navigation.navigate('Salas')}
+                style={styles.buttonHome}>
                     <Text style={styles.text}>Salas</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                 onPress={()=>navigation.navigate('Catequizandos')}
-                style={styles.button}>
+                style={styles.buttonHome}>
                     <Text style={styles.text}>Catequizandos</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                style={styles.button}>
+                style={styles.buttonHome}>
                     <Text style={styles.text}>Catequistas</Text>
                 </TouchableOpacity>
         </View>

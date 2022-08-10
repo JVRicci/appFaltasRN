@@ -4,8 +4,8 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import config from "../../config/config.json"
 import axios from "axios"
 import styles from "../../assets/style/styles"
-import modalStyles from "../../assets/style/modalStyle"
 import CadEncontroModal from './modals/cadEncontroModal';
+import EncontrosModal from './modals/encontrosModal';
 
 
 export default function Salas({navigation}){
@@ -25,24 +25,30 @@ export default function Salas({navigation}){
   
 
     return (
-       <Pressable > 
+       <Pressable style={styles.salasContainer} > 
         <View onLayout={dadosTurma} >
             
+
+            <Text style={styles.textHeader}>Salas que você participa</Text>
 
             <View style={styles.consCatequizando}>
                 <FlatList data={turmas}
                 keyExtractor ={(item)=>item.id}
                 renderItem={({item})=>
-                <View>
-                    <Text>Dia de Encontro: {item.diaencontro}</Text>
-                    <Text>Formação: {item.formacao}</Text>
-                </View>
+                    <TouchableOpacity style={styles.catequizandoCell} >
+                        <Text style={styles.text}>Dia de Encontro: {item.diaencontro}</Text>
+                        <Text style={styles.text}>Formação: {item.formacao}</Text>
+                    </TouchableOpacity>
                 }
                 />
             </View>
             
             <View>
             <CadEncontroModal />
+            </View>
+            
+            <View>
+            <EncontrosModal />
             </View>
             
             
@@ -52,3 +58,10 @@ export default function Salas({navigation}){
         
     );
 }
+
+
+/* 
+npx sequelize-cli model:generate --name catequizandos --attributes idTurma:bigint,nome:string,nascimento:date,faltas:0,ativo:string,turma:string,faltaEncontro:int,faltaMissa:int
+
+
+*/

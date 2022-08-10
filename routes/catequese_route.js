@@ -41,6 +41,26 @@ var consTurma = router.get('/cons-turma', async(req,res)=>{
 })
 
 
+var consEncontros = router.get('/cons-encontros',async(req,res)=>{
+    var query = await models.encontros.findAll({
+        raw:true,
+        attributes:['id', 'idTurma', 'descricao'],
+       /* where:{
+            'idTurma':1
+        }*/
+    })
+
+    res.send(query)
+})
+
+var consCatequizandos = router.get('/cons-catequizandos',async(req,res)=>{
+    var query = await models.catequizandos.findAll({
+        raw:true,
+        attributes:['id','idTurma','nome','nascimento','faltas','ativo','turma','faltaEncontro','faltaMissa']
+    })
+    res.send(query)
+})
+
 
 //login
 
@@ -52,4 +72,4 @@ var login = router.get('/login',async(req,res)=>{
     res.send(query)
 })
 
-module.exports = {registrarTurma, consTurma, cadEncontro, login}
+module.exports = {registrarTurma, consTurma, cadEncontro, login, consEncontros, consCatequizandos}

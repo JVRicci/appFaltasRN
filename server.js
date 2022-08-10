@@ -24,6 +24,8 @@ app.post('/cad-encontro',rotas.cadEncontro)
 
 //consulta
 app.get('/cons-turma',rotas.consTurma)
+app.get('/cons-encontros',rotas.consEncontros)
+app.get('/cons-catequizandos',rotas.consCatequizandos)
 
 //start do server
 let port=process.env.PORT || 3000;
